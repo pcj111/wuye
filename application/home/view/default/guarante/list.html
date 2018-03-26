@@ -1,0 +1,55 @@
+{extend name="public/base" /}
+
+{block name="content-header"}
+<h5><i class="fa fa-fw fa-connectdevelop"></i> 插件列表</h5>
+</block>
+
+{block name="body"}
+<div class="row">
+    <div class="col-xs-12">
+        <div>
+            <a href="{:url('home/guarante/add')}
+"><i class="btn btn-warning">添加</i>
+            </a>
+        </div>
+        <!-- 数据列表 -->
+        <div class="table-responsive margin-top-5">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>名字</th>
+                    <th>电话</th>
+                    <th>发生时间</th>
+                    <th>内容</th>
+                    <th>房号</th>
+                    <th>状态</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach($rows as $row):?>
+                <tr>
+                    <td><?=$row['name']?></td>
+                    <td><?=$row['tel']?></td>
+                    <td><?=date('Y-m-d H:i:s',$row['time']-0)?></td>
+                    <td><?=$row['intro']?></td>
+                    <td><?=$row['sn']?></td>
+                    <td><?=$row['status']?'处理':'未处理'?></td>
+                </tr>
+                <?php endforeach;?>
+                </tbody>
+            </table>
+        </div>
+        <!-- 分页 -->
+        <div class="page">
+            {$_page}
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script type="text/javascript">
+    $(function(){
+        highlight_subnav('{:url("addons/index")}');
+    })
+</script>
+{/block}

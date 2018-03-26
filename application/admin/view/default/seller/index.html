@@ -1,0 +1,66 @@
+{extend name="public/base" /}
+
+{block name="content-header"}
+<h5><i class="fa fa-fw fa-connectdevelop"></i> 插件列表</h5>
+</block>
+{block name="body"}
+<div>
+<a href="{:url('admin/seller/add')}
+    "><i class="btn btn-primary">添加</i></a>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <!-- 数据列表 -->
+        <div class="table-responsive margin-top-5">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>标题</th>
+                    <th>商家名称</th>
+                    <th>开始时间</th>
+                    <th>结束时间</th>
+                    <th>图片</th>
+                    <th>活动状态</th>
+                    <th>发布状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach($rows as $row):?>
+                <tr>
+                    <td><?=$row['title']?></td>
+                    <td><?=$row['name']?></td>
+                    <td><?=$row['add_time']?></td>
+                    <td><?=$row['end_time']?></td>
+                    <td><img src="<?=$row['img']?>" width="50"></td>
+                    <td><?=$row['status']?'活动进行中':'活动已结束'?></td>
+                    <td><?=$row['sale']?'发布':'未发布'?></td>
+                    <td>
+                        <a href="{:url('admin/seller/edit',['id'=>$row[id]])}
+"><i class="btn btn-primary">修改</i></a>
+                            <a href="{:url('admin/seller/out',['id'=>$row[id]])}
+"><i class="btn btn-danger">删除</i></a>
+                        <a href="{:url('admin/seller/look',['id'=>$row[id]])}
+"><i class="btn btn-success">查看详情</i></a>
+                        <a href="{:url('admin/seller/sale',['id'=>$row[id]])}
+"><i class="btn btn-primary"><?=$row['sale']==0?'发布':'撤回'?></i></a>
+                    </td>
+                </tr>
+                <?php endforeach;?>
+                </tbody>
+            </table>
+        </div>
+        <!-- 分页 -->
+        <div class="page">
+            {$rows->render()}
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script type="text/javascript">
+    $(function(){
+        highlight_subnav('{:url("addons/index")}');
+    })
+</script>
+{/block}

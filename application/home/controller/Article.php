@@ -12,10 +12,8 @@ class Article extends Home {
 	public function index(){
 		/* 分类信息 */
 		$category = $this->category();
-
 		//频道页只显示模板，默认不读取任何内容
 		//内容可以通过模板标签自行定制
-
 		/* 模板赋值并渲染模板 */
 		$this->assign('category', $category);
 		return $this->fetch($category['template_index']);
